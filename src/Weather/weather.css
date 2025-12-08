@@ -1,0 +1,127 @@
+/* 天气结果卡片 */
+.weather-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  color: #333;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* “검색 결과 없음” 的时候也使用同一个容器样式 */
+.weather-container:not(:has(h2)) {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+/* 城市名称 */
+.weather-container h2 {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* 每一行信息 */
+.weather-container p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+/* 温度稍微重点一点 */
+.weather-container p:first-of-type {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* 简单淡入动画 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.favorites-container {
+  margin-top: 12px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.favorites-container h2 {
+  margin: 0 0 10px 0;
+  font-size: 20px;
+}
+
+.favorites-empty {
+  font-size: 14px;
+  color: #666;
+}
+
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.favorite-item {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.favorite-main {
+  flex: 1;
+}
+
+.favorite-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.favorite-city {
+  font-weight: 600;
+}
+
+.favorite-temp {
+  font-weight: 600;
+}
+
+.favorite-memo {
+  width: 100%;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 13px;
+}
+
+.favorite-delete {
+  align-self: center;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #e74a3b;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.favorites-clear {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #858796;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+}

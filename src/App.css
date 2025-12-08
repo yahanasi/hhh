@@ -1,0 +1,170 @@
+/* 全局基础样式（也可以放在 index.css，这里一起写了） */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #4e73df, #1cc88a);
+  color: #222;
+}
+
+/* 整个应用容器 */
+.container {
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 头部标题 */
+header {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #fff;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* 主体内容区域 */
+main {
+  flex: 1;
+}
+
+/* 搜索区域 */
+.search-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.search-container input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.search-container button {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background-color: #1cc88a;
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.2s ease;
+}
+
+.search-container button:hover {
+  background-color: #17a673;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
+}
+
+.search-container button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* 页脚 */
+footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 12px;
+  color: #e5e5e5;
+}
+
+.nav {
+  margin-top: 8px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.nav a {
+  color: #f1f1f1;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.nav a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* 收藏按钮容器 */
+.favorite-add-container {
+  margin-top: 12px;
+  text-align: right;
+}
+
+.favorite-add-container button {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: none;
+  background-color: #ffcd39;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 首页下方收藏预览 */
+.favorite-preview {
+  margin-top: 20px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.favorite-preview h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+}
+
+.favorite-preview ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+.favorite-preview-hint {
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+/* 语言切换按钮 */
+.lang-switch {
+  margin-top: 8px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.lang-switch button {
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.lang-switch button.active {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #1f4f66;
+}

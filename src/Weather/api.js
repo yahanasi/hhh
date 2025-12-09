@@ -6,7 +6,7 @@ const DEV_BASE_URL = "http://localhost:5000";
 
 // 线上部署后的后端地址：
 // 以后把这里改成你在腾讯云 / 其他平台部署后端得到的域名
-const PROD_BASE_URL = "https://your-backend-domain.com";
+const PROD_BASE_URL = "https://weathernow-backend-e5xl.onrender.com";
 
 // 根据环境选择后端地址
 const BASE_URL =

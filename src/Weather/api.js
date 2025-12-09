@@ -1,63 +1,47 @@
-const API_KEY = "052f8d4bd4445cbe12464d08513db811"; 
+// src/Weather/api.js
+// 前端只负责请求自己的后端，不再直接访问 OpenWeather。
 
-const API_LANG_MAP = {
-  ko: "kr",     // 韩文
-  zh: "zh_cn",  // 简体中文
-  en: "en",     // 英文
-};
+// 本地开发用的后端地址
+const DEV_BASE_URL = "http://localhost:5000";
 
-// city 可以是 Seoul / 서울 / 首尔
+// 线上部署后的后端地址：
+// 以后把这里改成你在腾讯云 / 其他平台部署后端得到的域名
+const PROD_BASE_URL = "https://your-backend-domain.com";
+
+// 根据环境选择后端地址
+const BASE_URL =
+  process.env.NODE_ENV === "production" ? PROD_BASE_URL : DEV_BASE_URL;
+
+/**
+ * 获取天气信息
+ * @param {string} city - 城市名称（Seoul / 서울 / 首尔 都可以）
+ * @param {"ko"|"zh"|"en"} lang - 语言
+ */
 export async function getWeather(city, lang = "ko") {
+  if (!city || !city.trim()) {
+    return null;
+  }
+
   try {
-    const apiLang = API_LANG_MAP[lang] || "en";
+    const url =
+      `${BASE_URL}/api/weather?` +
+      `city=${encodeURIComponent(city)}` +
+      `&lang=${encodeURIComponent(lang)}`;
 
-    // ① 先用地理编码 API 按城市名查坐标（支持多语言别名）
-    const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
-      city
-    )}&limit=1&appid=${API_KEY}`;
-    console.log("Geo URL:", geoUrl);
+    console.log("Request backend:", url);
 
-    const geoRes = await fetch(geoUrl);
-    const geoData = await geoRes.json();
-    console.log("Geo data:", geoData);
+    const res = await fetch(url);
+    const data = await res.json();
 
-    if (!Array.isArray(geoData) || geoData.length === 0) {
-      console.error("도시를 찾을 수 없습니다.");
+    if (!res.ok) {
+      console.error("Backend error:", data);
       return null;
     }
 
-    const { lat, lon, name, local_names } = geoData[0];
-
-    // ② 再用坐标查当前天气（带语言参数）
-    const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=${apiLang}`;
-    console.log("Weather URL:", weatherUrl);
-
-    const weatherRes = await fetch(weatherUrl);
-    const weatherData = await weatherRes.json();
-    console.log("Weather data:", weatherData);
-
-    if (weatherRes.status !== 200 || String(weatherData.cod) !== "200") {
-      console.error("Weather API Error:", weatherData);
-      return null;
-    }
-
-    // ③ 按当前语言选一个好看的城市名
-    let displayName = name;
-    if (lang === "ko" && local_names?.ko) {
-      displayName = local_names.ko;
-    } else if (lang === "zh" && (local_names?.zh || local_names?.zh_cn)) {
-      displayName = local_names.zh || local_names.zh_cn;
-    } else if (lang === "en" && local_names?.en) {
-      displayName = local_names.en;
-    }
-
-    // 覆盖 name，这样前端直接用 data.name 显示
-    return {
-      ...weatherData,
-      name: displayName,
-    };
+    // 后端已经把城市名按语言处理好了，直接返回给 UI 用
+    return data;
   } catch (error) {
-    console.error("날씨 정보를 불러오지 못했습니다:", error);
+    console.error("调用后端获取天气失败:", error);
     return null;
   }
 }

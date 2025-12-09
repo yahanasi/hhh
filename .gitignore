@@ -5,6 +5,13 @@
 /.pnp
 .pnp.js
 
+# 后端
+weather-backend/node_modules/
+weather-backend/.env
+
+# 如果根目录也有 .env
+.env
+
 # testing
 /coverage
 
